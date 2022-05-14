@@ -1,4 +1,5 @@
-import 'package:fishing/next_page.dart';
+import 'package:fishing/memo_page.dart';
+import 'package:fishing/post_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,7 +31,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final items = List<String>.generate(10000, (i) => 'Item $i');
   int _counter = 0;
 
   void _incrementCounter() {
@@ -55,22 +55,44 @@ class _MyHomePageState extends State<MyHomePage> {
           Icon(Icons.share),
         ],
       ),
-      body: Container(
-        width: double.infinity,
-        child: GridView.count(
-          crossAxisCount: 3,
-          children: List.generate(100, (index) {
-            return Column(
-              children: <Widget>[
-                Expanded(
-                  child: Image.asset('images/IMG_5127.png'),
+      body: ListView(
+        children: <Widget>[
+          ListTile(
+            leading: const Icon(Icons.info),
+            title: const Text(
+                "釣果投稿",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
                 ),
-                Text('Ugui $index'),
-              ],
-            );
-          }),
-        ),
-      ),
+            ),
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PostPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.info),
+            title: const Text(
+              "釣りメモ",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
+            ),
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MemoPage()),
+              );
+            },
+          )
+        ],
+      )
     );
   }
 }
